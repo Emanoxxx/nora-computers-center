@@ -1,0 +1,32 @@
+.nav-background{
+    background: #89ABC6;
+    /*background: -webkit-linear-gradient(to left, #e6e5e0, #5987AE);
+    background: linear-gradient(to left, #a7c1d5, #5987AE);*/
+}
+.nav-login{
+    justify-content: end ;
+}
+.btn-outline-light{
+    color: rgb(216, 225, 236);
+}
+.btn-outline-light:hover{
+    color: rgb(255, 255, 255);
+}
+.link{
+    text-decoration: none;
+    color: rgb(216, 225, 236);
+}
+.link:hover{
+    color: rgb(255, 255, 255);
+}
+.link-drop-item{
+    text-decoration: none;
+}
+@media (max-width: 990px) {
+    .btn-login {
+        width: 100%;
+    }
+    .nav-login{
+        justify-content: center ;
+    }
+}

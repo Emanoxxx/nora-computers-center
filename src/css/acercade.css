@@ -1,0 +1,11 @@
+.img-acercaDe{
+    border-radius: 125px;
+    background: #89abc6;
+    width: 300px;
+}
+
+@media (max-width: 560px) {
+    .text-end{
+        text-align: start !important;
+    }
+}

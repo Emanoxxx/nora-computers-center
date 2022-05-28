@@ -1,0 +1,19 @@
+.Mensajes{
+    bottom: 120px;
+    right: 125px;
+    min-height: 25rem;
+    max-height: 25rem;
+    height: 25rem;
+}
+.Mensajes .toast{
+    height: 100%;
+}
+@media (max-width: 700px) {
+    .Mensajes{
+        bottom: 140px;
+        right: 20px;
+        left: 20px;
+        min-width: 12rem;
+        width: auto;
+    }
+}

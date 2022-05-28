@@ -1,0 +1,14 @@
+.bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.678), rgba(0, 0, 0, 0.342)),url("../img/intro-header.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bg h2{
+  color: #effbfc;
+  margin: 0;
+}
+.bg h1{
+  color: #fff;
+  font-size: 6.5rem;
+}

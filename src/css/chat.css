@@ -1,0 +1,81 @@
+.btn-chat{
+    padding: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 1000;
+    background-color: #89abc6;
+    border-color: #89abc6;
+}
+.section-chat{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+.btn-chat:hover{
+    background-color: #a9c1d4;
+    border-color: #6ea3ce;
+}
+.btn-chat:focus{
+    background-color: #a9c1d4;
+    border-color: #6ea3ce;
+}
+.btn-chat img{
+    width: 100px;
+}
+.chat-image{
+    width: 30px;
+    background-color: #89abc6;
+}
+.chats-list{
+    bottom: 130px;
+    max-height: 60%;
+    max-width: 60px;
+    overflow-y: auto;
+    overflow-x: visible;
+    right: 20px;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    outline: none;
+    border: none;
+}
+.chat-list-body{
+    background: none;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    overflow: hidden;
+    padding: 0;
+}
+.send-btn{
+    width: 50px;
+    height: 50px;
+    margin-left: .5rem;
+    background-color: #89abc6;
+    border: none;
+}
+.send-btn:hover{
+    background-color: #a1c6e4;
+}
+.remitente{
+    display: flex;
+    justify-content: end;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+.destinatario{
+    display: flex;
+    justify-content: start;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+.mensajeria{
+    max-height: 280px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+@media (max-width: 700px) {
+    .btn-chat img{
+        width: 90px;
+    }
+}

@@ -1,0 +1,7 @@
+.bg-login-btn{
+    background-color: #114971;
+    border:none;
+}
+.bg-login-btn:hover{
+    background-color: #1c679c;
+}
