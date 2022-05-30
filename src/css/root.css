@@ -24,4 +24,17 @@
     margin-top: 100px;
     min-height: 100vh;
 }
+.text-area{
+  resize: none;
+  overflow-y: auto;
+}
+.btn-add-Observacion{
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: #89abc6;
+}
+.btn-add-Observacion:hover{
+  
+  background-color: #6b9ac0;
+}
  

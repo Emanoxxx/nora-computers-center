@@ -34,13 +34,31 @@ import { useState } from 'react';
                 >
                     <Nav.Link><Link className='link' to="/">Acerca de nosotros</Link></Nav.Link>
                     <NavDropdown title="Equipos" id="basic-nav-dropdown">
-                        <NavDropdown.Item ><Link className='link-drop-item' to="/Solicitud">Registrar Solicitud</Link></NavDropdown.Item>
-                        <NavDropdown.Item ><Link className='link-drop-item' to="/Equipos">Lista de Equipos</Link></NavDropdown.Item>
-                        <NavDropdown.Item ><Link className='link-drop-item' to="/Observaciones">Observaciones</Link></NavDropdown.Item>
+                    <NavDropdown.Item ><Link className='link-drop-item' to="/Equipos">Lista de Equipos</Link></NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item><Link className='link-drop-item' to="/Bitacora">Bitacoras</Link></NavDropdown.Item>
+                        {
+                            localStorage.getItem("rol")===("profesor")||localStorage.getItem("rol")===("administrador")?
+                            (
+                                <NavDropdown.Item><Link className='link-drop-item' to="/Bitacora">Bitacora</Link></NavDropdown.Item>
+                            ):""
+                        }
+                        {
+                            localStorage.getItem("rol")===("administrador")||localStorage.getItem("rol")===("alumno")?
+                            (
+                                <>
+                                <NavDropdown.Item ><Link className='link-drop-item' to="/Solicitud">Registrar Solicitud</Link></NavDropdown.Item>
+                                <NavDropdown.Item ><Link className='link-drop-item' to="/Observaciones">Observaciones</Link></NavDropdown.Item>
+                                </>
+                            ):""
+                        }
                     </NavDropdown>
-                    <Nav.Link><Link className='link' to="/Usuarios">Lista Usuarios</Link></Nav.Link>
+                    {
+                        localStorage.getItem("rol")===("administrador")?
+                        (
+                            <Nav.Link><Link className='link' to="/Usuarios">Lista Usuarios</Link></Nav.Link>
+                        ):""
+                    }
+                    
                 </Nav>
                 <Navbar.Collapse className=" d-flex px-5  nav-login" >
                     <Login/>

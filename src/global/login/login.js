@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import {Form,Button,Modal,Alert} from 'react-bootstrap';
+import { Outlet, Link } from "react-router-dom";
+import {Form,Button,Modal,Alert,NavDropdown} from 'react-bootstrap';
 import "../../css/login.css"
-import {Logueo} from "../../services/login"
+import axios from 'axios';
 function Login(props){
   const [show, setShow] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -11,24 +12,66 @@ function Login(props){
   var [variant,setVariant] =useState("info");
   var [alertMessage,setAlertMessage] =useState("");
   const [validated, setValidated] = useState(false);
-
+  var [nombreButon,setNombreButon] =useState(()=>{if(localStorage.getItem("nombre")===null){return "Iniciar sesion"}else{return "Hola "+localStorage.getItem("nombre")}}) 
+  //useState("Iniciar Sesion");
+  var [rol,setRol] =useState("");
   const handleSubmit = (event) => {
+    setShowAlert(false)
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
-      alert("Caracteres invalidos.")
+      setShowAlert(true)
+      setAlertMessage("Caracteres invalidos.")
       setValidated(true);
       return
     }
     var matricula=event.target[0].value
     var password=event.target[1].value
     setValidated(true);
-    Logueo({matricula,password})
+    try {
+      axios.post('http://alethetwin.online:8080/api/v1/Login/',
+          {
+          matricula,
+          password
+          })
+          .then(function (response) {
+              console.log(response.data);
+              setShowAlert(true)
+              localStorage.setItem("carrera",response.data.carrera) 
+              localStorage.setItem("matricula",response.data.matricula) 
+              localStorage.setItem("nombre",response.data.nombre) 
+              localStorage.setItem("rol",response.data.rol) 
+              localStorage.setItem("token",response.data.token) 
+              setAlertMessage("Hola "+localStorage.getItem("nombre"))
+              setNombreButon("Hola "+localStorage.getItem("nombre"))
+              handleClose()
+              window.location.replace('');
+          })
+          .catch(function (error) {
+              //console.log(error);
+              setShowAlert(true)
+              setAlertMessage("Algo salio mal")
+          });
+    } catch (error) {
+        console.log(error)
+    }
   };
   return (
     <>
-    <Button variant="outline-light" className="rounded-pill p-2 px-5 bg-transparent btn-login" onClick={handleShow}>Iniciar sesion</Button>{' '}
+    
+    {
+    localStorage.getItem("matricula") !==null?
+      (
+        <NavDropdown title={nombreButon} id="basic-nav-dropdown" className="rounded-pill p-2 px-5 bg-transparent btn-login btn btn-outline-light btn-logueado">
+          
+          <NavDropdown.Divider />
+          <NavDropdown.Item><Button variant="outline-danger" className="rounded-pill p-2 px-5 bg-transparent btn-login" onClick={cerrarSesion}>Cerrar Sesion</Button></NavDropdown.Item>
+        </NavDropdown>
+      ):(
+      <Button variant="outline-light" className="rounded-pill p-2 px-5 bg-transparent btn-login" onClick={handleShow}>{nombreButon}</Button>
+      )
+    }
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Inicio de sesion</Modal.Title>
@@ -64,5 +107,15 @@ function Login(props){
       </Modal>
     </>
   );
+  function cerrarSesion(){
+    localStorage.removeItem("carrera") 
+    localStorage.removeItem("matricula") 
+    localStorage.removeItem("nombre") 
+    localStorage.removeItem("rol") 
+    localStorage.removeItem("token") 
+    setNombreButon("Iniciar sesion")
+    window.location.replace('');
+  }
 }
+
 export default Login;

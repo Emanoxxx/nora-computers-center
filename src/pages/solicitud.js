@@ -8,6 +8,14 @@ import Chat from '../chat/chat';
 import EquipoList from "../equipos/lista-equipos"
 import "../css/root.css"
 const Solicitud = () => {
+        if ((localStorage.getItem("rol")!==("alumno")) && (localStorage.getItem("rol")!==("administrador"))) {
+          if (localStorage.getItem("nombre")===null) {
+            alert("Lo siento no tienes permitido entrar aqui")
+          }else{
+            alert("Lo siento "+localStorage.getItem("nombre")+" no tienes permitido entrar aqui")
+          }
+          window.location.replace('/');
+        }else{
         return (
         <React.StrictMode>
         <Header/>
@@ -16,6 +24,7 @@ const Solicitud = () => {
         <Footer/>
         </React.StrictMode>
         );
+        }
       };
       
       export default Solicitud;

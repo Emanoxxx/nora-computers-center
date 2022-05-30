@@ -5,3 +5,18 @@
 .bg-login-btn:hover{
     background-color: #1c679c;
 }
+.btn-logueado>div{
+    width: 100%;
+    text-align: center;
+    background-color: #89a9c6b4;
+}
+.btn-logueado a{
+    color: #cad9e5;
+}
+.btn-logueado a:hover{
+    color: #f1f6fa;
+    background-color: #89a8c6da;
+}
+.btn-logueado a:focus{
+    color: #f1f6fa;
+}

@@ -1,10 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import {Table,Button,Modal,Form,Alert} from 'react-bootstrap';
-import Equipo from "./equipo"
-import "../css/usuarios-lista.css"
+import Materia from "./materia"
 import axios from 'axios';
-export default class EquipoList extends React.Component {
+export default class MateriaList extends React.Component {
   constructor(props){
     super(props)
     this.toggleUpdate = this.toggleUpdate.bind(this);
@@ -15,7 +14,7 @@ export default class EquipoList extends React.Component {
     this.onsubmit = this.onsubmit.bind(this);
     this.state={
       update: false,
-      equipos:[],
+      materias:[],
       show:false,
       showAlert:false,
       alertMessage:"",
@@ -33,10 +32,14 @@ export default class EquipoList extends React.Component {
   }
   componentDidMount() {
     
-    axios.get(`http://alethetwin.online:8080/api/v1/Equipos/`)
+    axios.get(`http://alethetwin.online:8080/api/v1/materias/`,{
+      headers: {
+          "Authorization": "Bearer "+localStorage.getItem("token")
+      }
+    })
       .then(res => {
-        const equipos = res.data;
-        this.setLista( equipos );
+        const materias = res.data;
+        this.setLista( materias );
       }).catch(function (error) {
         console.log(error)
           if(error.response){
@@ -54,8 +57,8 @@ export default class EquipoList extends React.Component {
     this.setState({showAlert:false})
     this.setState({show:!this.state.show})
   }
-  setLista(equipos){
-    this.setState({ equipos });
+  setLista(materias){
+    this.setState({ materias });
   }
   handleSubmit = (event) => {
     event.preventDefault();
@@ -71,10 +74,18 @@ export default class EquipoList extends React.Component {
       this.setValidated(true);
       return
     }
+    if(event.target[2].value!==event.target[3].value){
+      this.setShowAlert(true)
+      this.setAlertMessage("Contraseñas no coinciden")
+      return
+    }
     this.setValidated(true);
-    axios.post(`http://alethetwin.online:8080/api/v1/Equipos/`,{
+    axios.post(`http://alethetwin.online:8080/api/v1/materias/`,{
             nombre:event.target[1].value,
-            descripcion:event.target[2].value
+            password:event.target[2].value,
+            matricula:event.target[4].value,
+            carrera:event.target[5].value,
+            rol:event.target[6].value
           },{
                 headers: {
                     "Authorization": "Bearer "+localStorage.getItem("token")
@@ -88,14 +99,21 @@ export default class EquipoList extends React.Component {
                 this.toggleModalAdd()
             }).catch(function (error) {
               console.log(error)
-              this.setsetShowAlert(true)
-              this.setAlertMessage("Algo salio mal")
+                if(error.response){
+                  this.setsetShowAlert(true)
+                  this.setAlertMessage(error.response.data.error)
+                  return
+                }else{
+                  this.setsetShowAlert(true)
+                  this.setAlertMessage("Algo salio mal")
+                }
+              
           });
   }
   render(){
     return (
       <section className='section-first-item'>
-    <h1 className='text-center'>Lista de Equipos</h1>
+    <h1 className='text-center'>Lista de materias</h1>
     {
       localStorage.getItem("rol")==="administrador"?(
         <div className='px-2 d-flex justify-content-end'>
@@ -106,12 +124,12 @@ export default class EquipoList extends React.Component {
     {
       localStorage.getItem("rol")==="administrador" && this.state.update===true?(
         <div className='px-2 d-flex justify-content-center'>
-          <Button onClick={this.toggleModalAdd}>Agregar nuevo Equipo</Button>
+          <Button onClick={this.toggleModalAdd}>Agregar nuevo Usuario</Button>
           <Modal show={this.state.show} onHide={this.toggleModalAdd}>
           
             <Form onSubmit={this.onsubmit} noValidate validated={this.validated}>
                 <Modal.Header closeButton>
-                <Modal.Title>Agregando equipo</Modal.Title>
+                <Modal.Title>Agregando Usuario</Modal.Title>
                 </Modal.Header>
                 
                 <Modal.Body>
@@ -121,7 +139,7 @@ export default class EquipoList extends React.Component {
                   <Alert key="info" variant="info">
                     {this.state.alertMessage}
                   </Alert>
-                  ):""
+                ):""
                   
                 
                 }
@@ -129,9 +147,35 @@ export default class EquipoList extends React.Component {
                       <Form.Label>Nombre</Form.Label>
                       <Form.Control type="text" placeholder="Nombre" pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
                     </Form.Group>
-                    <Form.Group className="mb-3 d-flex flex-column">
-                      <Form.Label>Descripcion</Form.Label>
-                      <textarea className='text-area' placeholder='Descripcion...' rows={5} pattern="[A-Za-z0-9 ]{1,256}" title='No uses caracteres especiales, ni lo dejes en blanco.'></textarea>
+                    <Form.Group className="mb-3">
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control type="password" placeholder="Password" pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                      <Form.Label>Repite tu Password</Form.Label>
+                      <Form.Control type="password" placeholder="Repite tu Password" pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                      <Form.Label>Matricula</Form.Label>
+                      <Form.Control type="text" placeholder="Matricula" pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                      <Form.Label>Carrera</Form.Label>
+                      <select class="form-select" aria-label="Default select ">
+                        <option selected value="LTC">LTC</option>
+                        <option selected value="LIS">LIS</option>
+                        <option selected value="LE">LE</option>
+                        <option selected value="LRySC">LRySC</option>
+                        <option selected value="NA">No aplica</option>
+                      </select>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                      <Form.Label>Rol</Form.Label>
+                      <select class="form-select" aria-label="Default select ">
+                        <option selected value="alumno">Alumno</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="profesor">Profesor</option>
+                      </select>
                     </Form.Group>
                   
                 </Modal.Body>
@@ -152,12 +196,12 @@ export default class EquipoList extends React.Component {
     <thead>
       
     <tr>
-      <th>Numero de inventario</th>
+      <th>NRC</th>
       <th>Nombre</th>
-      <th>Descripcion</th>
-      <th>Disponible hasta</th>
+      <th>Profesor</th>
+      <th>Alumno</th>
       {
-        (localStorage.getItem("rol")===("administrador")||localStorage.getItem("rol")===("alumno"))?
+        localStorage.getItem("rol")===("administrador")&&this.state.update?
         (
           <th>Acciones</th>
         ):""
@@ -165,9 +209,9 @@ export default class EquipoList extends React.Component {
     </tr>
   </thead>
   <tbody>
-    {this.state.equipos.map(
-      equipo=>
-      <Equipo nombre={equipo.nombre} numeroInventario={equipo.numeroInventario} descripcion={equipo.descripcion} disponibleHasta={equipo.disponibleHasta} update={this.state.update}></Equipo>
+    {this.state.materias.map(
+      usuario=>
+      <Materia nombre={usuario.nombre} matricula={usuario.matricula} carrera={usuario.carrera} rol={usuario.rol} prestamos={[]} update={this.state.update}></Materia>
     )}
   </tbody>
   </Table>

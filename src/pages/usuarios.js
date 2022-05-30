@@ -8,6 +8,14 @@ import Chat from '../chat/chat';
 import UserList from '../usuarios/lista-usuarios';
 import "../css/root.css"
 const Usuarios= () => {
+        if (localStorage.getItem("rol")!==("administrador")) {
+          if (localStorage.getItem("nombre")===null) {
+            alert("Lo siento no tienes permitido entrar aqui")
+          }else{
+            alert("Lo siento "+localStorage.getItem("nombre")+" no tienes permitido entrar aqui")
+          }
+          window.location.replace('/');
+        }else{
         return (
         <React.StrictMode>
         <Header/>
@@ -16,6 +24,7 @@ const Usuarios= () => {
         <Footer/>
         </React.StrictMode>
         );
+        }
       };
       
       export default Usuarios

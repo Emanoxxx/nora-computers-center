@@ -9,6 +9,7 @@ import Chat from '../chat/chat';
 import Acercade from '../home/acercaDe';
 import "../css/root.css"
 const Home = () => {
+  console.log(localStorage.getItem("rol"))
     return (
     <React.StrictMode>
     <Header/>
