@@ -82,6 +82,7 @@ export default class EquipoList extends React.Component {
             }
           )
             .then(res => {
+                this.state.equipos.push(res.data)
                 this.setShowAlert(true)
                 this.setAlertMessage("Agregado con exito")
                 alert("Agregado con exito")
@@ -94,7 +95,7 @@ export default class EquipoList extends React.Component {
   }
   render(){
     return (
-      <section className='section-first-item'>
+      <section className='section-first-item px-3'>
     <h1 className='text-center'>Lista de Equipos</h1>
     {
       localStorage.getItem("rol")==="administrador"?(
@@ -118,7 +119,7 @@ export default class EquipoList extends React.Component {
                 {
                 this.state.showAlert !==false?
                 (
-                  <Alert key="info" variant="info">
+                  <Alert key="warning" variant="warning">
                     {this.state.alertMessage}
                   </Alert>
                   ):""
@@ -154,12 +155,11 @@ export default class EquipoList extends React.Component {
     <tr>
       <th>Numero de inventario</th>
       <th>Nombre</th>
-      <th>Descripcion</th>
-      <th>Disponible hasta</th>
+      <th >Descripcion</th>
       {
         (localStorage.getItem("rol")===("administrador")||localStorage.getItem("rol")===("alumno"))?
         (
-          <th>Acciones</th>
+          <th className='text-center'>Acciones</th>
         ):""
       }
     </tr>
@@ -167,7 +167,7 @@ export default class EquipoList extends React.Component {
   <tbody>
     {this.state.equipos.map(
       equipo=>
-      <Equipo nombre={equipo.nombre} numeroInventario={equipo.numeroInventario} descripcion={equipo.descripcion} disponibleHasta={equipo.disponibleHasta} update={this.state.update}></Equipo>
+      <Equipo nombre={equipo.nombre} numeroInventario={equipo.numeroInventario} descripcion={equipo.descripcion}   update={this.state.update}></Equipo>
     )}
   </tbody>
   </Table>

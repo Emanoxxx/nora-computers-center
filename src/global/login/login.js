@@ -9,13 +9,14 @@ function Login(props){
   const [showAlert, setShowAlert] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  var [variant,setVariant] =useState("info");
+  var [variant,setVariant] =useState("warning");
   var [alertMessage,setAlertMessage] =useState("");
   const [validated, setValidated] = useState(false);
   var [nombreButon,setNombreButon] =useState(()=>{if(localStorage.getItem("nombre")===null){return "Iniciar sesion"}else{return "Hola "+localStorage.getItem("nombre")}}) 
   //useState("Iniciar Sesion");
   var [rol,setRol] =useState("");
   const handleSubmit = (event) => {
+    setVariant("warning")
     setShowAlert(false)
     event.preventDefault();
     const form = event.currentTarget;
@@ -36,7 +37,7 @@ function Login(props){
           password
           })
           .then(function (response) {
-              console.log(response.data);
+              setVariant("success")
               setShowAlert(true)
               localStorage.setItem("carrera",response.data.carrera) 
               localStorage.setItem("matricula",response.data.matricula) 
@@ -50,6 +51,7 @@ function Login(props){
           })
           .catch(function (error) {
               //console.log(error);
+              setVariant("danger")
               setShowAlert(true)
               setAlertMessage("Algo salio mal")
           });

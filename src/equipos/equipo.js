@@ -6,6 +6,7 @@ import axios from 'axios';
 import { data } from 'jquery';
 import EquipoObservaciones from "./equipo-observaciones"
 function Equipo(props){
+    var now=moment()
     const [nombre, setnombre] = useState(props.nombre);
     const [descripcion, setdescripcion] = useState(props.descripcion);
     const [disponible, setdisponible] = useState(props.disponibleHasta);
@@ -51,14 +52,13 @@ function Equipo(props){
     }
    
     function updateEquipo(id){
-        if(nombre===""&&descripcion===""&&disponible===""){
+        if(nombre===""&&descripcion===""){
           return
         }
         
         axios.put(`http://alethetwin.online:8080/api/v1/Equipos/${props.numeroInventario}`,{
             nombre,
-            descripcion,
-            "disponibleHasta":moment(disponible)
+            descripcion
           },{
                 headers: {
                     "Authorization": "Bearer "+localStorage.getItem("token")
@@ -101,11 +101,11 @@ function Equipo(props){
                 <th>{props.numeroInventario}</th>
                 <th>{props.update?(<input onChange={event => setnombre(event.target.value)} type="text" name={"nombre-"+props.numeroInventario} defaultValue={props.nombre}/>):(""+props.nombre)}</th>
                 <th>{props.update?(<input onChange={event => setdescripcion(event.target.value)} type="text" name={"descripcion-"+props.numeroInventario} defaultValue={props.descripcion}/>):(""+props.descripcion)}</th>
-                <th>{props.update?(<input onChange={event => setdisponible(event.target.value)} type="datetime-local" name={"disponible-"+props.numeroInventario} defaultValue={props.disponibleHasta}/>):(""+props.disponibleHasta)}</th>
+                <th className='d-flex justify-content-between'>
                 {
                 localStorage.getItem("rol")===("administrador")?
                 (
-                  <th>{props.update?(<><Button variant='outline-warning' onClick={()=>{updateEquipo(props.numeroInventario)}}>Actualizar</Button> <Button variant='outline-danger' onClick={toggleModal}>Borrar</Button></>):""}</th>
+                  <>{props.update?(<th><Button variant='outline-warning' onClick={()=>{updateEquipo(props.numeroInventario)}}>Actualizar</Button> <Button variant='outline-danger' onClick={toggleModal}>Borrar</Button></th>):""}</>
                 ):""
                 }
                 {
@@ -122,7 +122,7 @@ function Equipo(props){
                         {
                         showAlert !==false?
                         (
-                        <Alert key="info" variant="info">
+                        <Alert key="warning" variant="warning">
                             {alertMessage}
                         </Alert>
                         ):""
@@ -159,6 +159,7 @@ function Equipo(props){
                   }</th>
                 ):""
                 }
+                </th>
                 <Modal show={show} onHide={toggleModal}>
                     <Modal.Header closeButton>
                     <Modal.Title>Borrar equipo</Modal.Title>

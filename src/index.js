@@ -7,6 +7,7 @@ import Equipos from "./pages/equipos";
 import Observaciones from "./pages/observaciones";
 import Usuarios from "./pages/usuarios";
 import Solicitud from "./pages/solicitud";
+import Materia from "./pages/materia";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="Observaciones" element={<Observaciones />} />
           <Route path="Usuarios" element={<Usuarios />} />
           <Route path="Solicitud" element={<Solicitud />} />
+          <Route path="Materias" element={<Materia />} />
       </Routes>
     </BrowserRouter>
   );

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../global/header';
 import Footer from '../global/footer';
 import Chat from '../chat/chat';
-import EquipoList from "../equipos/lista-equipos"
+import SolicitudRegistro from "../solicitud/solicitud"
 import "../css/root.css"
 const Solicitud = () => {
         if ((localStorage.getItem("rol")!==("alumno")) && (localStorage.getItem("rol")!==("administrador"))) {
@@ -20,7 +20,7 @@ const Solicitud = () => {
         <React.StrictMode>
         <Header/>
         <Chat/>
-        <EquipoList/>
+        <SolicitudRegistro></SolicitudRegistro>
         <Footer/>
         </React.StrictMode>
         );

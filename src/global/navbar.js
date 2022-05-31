@@ -47,6 +47,15 @@ import { useState } from 'react';
                             (
                                 <>
                                 <NavDropdown.Item ><Link className='link-drop-item' to="/Solicitud">Registrar Solicitud</Link></NavDropdown.Item>
+                                </>
+                            ):""
+                            
+                        }
+                        {
+
+                            localStorage.getItem("rol")===("administrador")?
+                            (
+                                <>
                                 <NavDropdown.Item ><Link className='link-drop-item' to="/Observaciones">Observaciones</Link></NavDropdown.Item>
                                 </>
                             ):""
@@ -55,7 +64,10 @@ import { useState } from 'react';
                     {
                         localStorage.getItem("rol")===("administrador")?
                         (
+                            <>
                             <Nav.Link><Link className='link' to="/Usuarios">Lista Usuarios</Link></Nav.Link>
+                            <Nav.Link><Link className='link' to="/Materias">Lista Materias</Link></Nav.Link>
+                            </>
                         ):""
                     }
                     

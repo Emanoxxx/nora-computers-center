@@ -94,6 +94,7 @@ export default class EquipoList extends React.Component {
             }
           )
             .then(res => {
+                this.state.usuarios.push(res.data)
                 this.setShowAlert(true)
                 this.setAlertMessage("Agregado con exito")
                 alert("Agregado con exito")
@@ -113,7 +114,7 @@ export default class EquipoList extends React.Component {
   }
   render(){
     return (
-      <section className='section-first-item'>
+      <section className='section-first-item px-3 '>
     <h1 className='text-center'>Lista de Usuarios</h1>
     {
       localStorage.getItem("rol")==="administrador"?(
@@ -137,7 +138,7 @@ export default class EquipoList extends React.Component {
                 {
                 this.state.showAlert !==false?
                 (
-                  <Alert key="info" variant="info">
+                  <Alert key="warning" variant="warning">
                     {this.state.alertMessage}
                   </Alert>
                 ):""

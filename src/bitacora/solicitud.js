@@ -16,8 +16,11 @@ function Solicitud(props){
                 <tr>
                   <td>{props.bitacora.id}</td>
                   <td>{props.bitacora.solicitanteId}</td>
-                  <td>{props.bitacora.horaEntrada}</td>
-                  <td>{props.bitacora.horaSalida}</td>
+                  <td>{props.bitacora.objetivo}</td>
+                  <td>{props.bitacora.equipoId}</td>
+                  <td>{moment(props.bitacora.creadoEn).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                  <td>{moment(props.bitacora.horaEntrada).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                  <td>{moment(props.bitacora.horaSalida).format('MMMM Do YYYY, h:mm:ss a')}</td>
                   <td>{props.bitacora.materiaNRC}</td>
                 </tr>
             );

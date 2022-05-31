@@ -3,24 +3,24 @@ import { useState } from 'react';
 import {Table,Button,Modal,Col} from 'react-bootstrap';
 import moment from 'moment';
 import axios from 'axios';
-function Usuario(props){
-    const [matricula, setmatricula] = useState(props.matricula);
+function Materia(props){
+    const [nrc, setnrc] = useState(props.nrc);
     const [nombre, setnombre] = useState(props.nombre);
-    const [carrera, setcarrera] = useState(props.carrera);
-    const [rol, setrol] = useState(props.rol);
-    const [prestamos, setprestamos] = useState(props.prestamos);
+    const [profesorId, setprofesorId] = useState(props.profesorId);
+    const [profesores, setprofesores] = useState(props.profesores);
     const [show, setShow] = useState(false);
     const [existe, setExiste] = useState(true);
     const toggleModal = () => setShow(!show);
     function updateUsuario(id){
-        if(nombre===""&&matricula===""&&carrera===""&&rol===""&&prestamos===""){
+        console.log(profesorId)
+        if(nombre===""&&profesorId===""&&nrc===""){
           return
         }
         
-        axios.put(`http://alethetwin.online:8080/api/v1/Usuarios/${matricula}`,{
+        axios.put(`http://alethetwin.online:8080/api/v1/Materias/${nrc}`,{
             nombre,
-            carrera,
-            rol
+            profesorId,
+            nrc
           },{
                 headers: {
                     "Authorization": "Bearer "+localStorage.getItem("token")
@@ -40,7 +40,7 @@ function Usuario(props){
           });
       }
       function deleteEquipo(){
-        axios.delete(`http://alethetwin.online:8080/api/v1/Usuarios/${matricula}`,{
+        axios.delete(`http://alethetwin.online:8080/api/v1/Materias/${nrc}`,{
                 headers: {
                     "Authorization": "Bearer "+localStorage.getItem("token")
                 }
@@ -60,32 +60,30 @@ function Usuario(props){
             return (
                 <tr>
                     
-                <th>{matricula}</th>
-                <th>{props.update?(<input onChange={event => setnombre(event.target.value)} type="text" name={"nombre-"+matricula} defaultValue={nombre}/>):(""+nombre)}</th>
+                <th>{nrc}</th>
+                <th>{props.update?(<input onChange={event => setnombre(event.target.value)} type="text" name={"nombre-"+nrc} defaultValue={nombre}/>):(""+nombre)}</th>
                 <th>{props.update?(
-                    <select defaultValue={carrera} onChange={event => setcarrera(event.target.value)} class="form-select" aria-label="Default select ">
-                        <option selected value="LTC">LTC</option>
-                        <option selected value="LIS">LIS</option>
-                        <option selected value="LE">LE</option>
-                        <option selected value="LRySC">LRySC</option>
-                        <option selected value="NA">No aplica</option>
-                    </select>):(""+carrera)}</th>
-                <th>{props.update?(<select onChange={event => setrol(event.target.value)} class="form-select" aria-label="Default select " defaultValue={rol}>
-                        <option selected value="alumno">Alumno</option>
-                        <option value="administrador">Administrador</option>
-                        <option value="profesor">Profesor</option>
-                      </select>):(""+rol)}</th>
+                    
+                    <select defaultValue={profesorId} onChange={event => setprofesorId(event.target.value)} class="form-select" aria-label="Default select ">
+                        
+                        {props.profesores.map(
+                        profesor=>
+                        <option selected value={profesor.matricula}>{profesor.nombre}</option>
+                        )}
+                    </select>
+                    ):(""+profesorId)}
+                </th>
                 {
                 localStorage.getItem("rol")===("administrador")?
                 (
-                  <th>{props.update?(<><Button variant='outline-warning' onClick={()=>{updateUsuario(matricula)}}>Actualizar</Button> <Button variant='outline-danger' onClick={toggleModal}>Borrar</Button></>):""}</th>
+                  <th>{props.update?(<><Button variant='outline-warning' onClick={()=>{updateUsuario(nrc)}}>Actualizar</Button> <Button variant='outline-danger' onClick={toggleModal}>Borrar</Button></>):""}</th>
                 ):""
                 }
                 <Modal show={show} onHide={toggleModal}>
                     <Modal.Header closeButton>
-                    <Modal.Title>Borrar usuario</Modal.Title>
+                    <Modal.Title>Borrar materia</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>¿Seguro que desea borrar el usuario <b>{nombre}</b> con numero de inventario <b>{matricula}</b>?</Modal.Body>
+                    <Modal.Body>¿Seguro que desea borrar la materia <b>{nombre}</b> con nrc <b>{nrc}</b>?</Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={toggleModal}>
                         No estoy seguro
@@ -99,5 +97,5 @@ function Usuario(props){
             );
         }
       };
-export default Usuario;
+export default Materia;
   

@@ -1,9 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { Outlet, Link } from "react-router-dom";
-import {Form,Button,Modal,Alert,NavDropdown} from 'react-bootstrap';
+import {Form,Button,Modal,Alert,Card, Table} from 'react-bootstrap';
 import axios from 'axios';
-
 export default class EquipoObservaciones extends React.Component {
     constructor(props){
         super(props)
@@ -15,7 +14,7 @@ export default class EquipoObservaciones extends React.Component {
           observaciones:[],
           show:false,
           showAlert:false,
-          variant:"info",
+          variant:"warning",
           alertMessage:""
         }
       }
@@ -28,7 +27,7 @@ export default class EquipoObservaciones extends React.Component {
             })
           .then(res => {
             const observaciones = res.data;
-            this.setLista( observaciones );
+            this.setState( {observaciones: observaciones});
           }).catch(function (error) {
             console.log(error)
               if(error.response){
@@ -53,9 +52,33 @@ export default class EquipoObservaciones extends React.Component {
               <Modal.Title>Observaciones de {this.props.nombre}</Modal.Title>
             </Modal.Header>
             <Modal.Body >
-    
+                {
+                this.state.observaciones.map(
+                observacion=>
+                <Card className='my-1'>
+                    <Card.Header>{observacion.id}</Card.Header>
+                    <Card.Body>
+                        <blockquote className="blockquote mb-0">
+                        <p>
+                            {' '}
+                            {observacion.contenido}
+                            {' '}
+                        </p>
+                        <footer className="blockquote-footer">
+                            <cite title="Source Title">{observacion.autorId}</cite>
+                        </footer>
+                        </blockquote>
+                    </Card.Body>
+                </Card>
+                )}
             </Modal.Body>
+            <Modal.Footer className='d-flex justify-content-center'>
+                <Button className="w-100" variant="secondary" onClick={this.handleClose}>
+                    Cerrar
+                </Button>
+            </Modal.Footer>
           </Modal>
+        
         </>
       );}
 }

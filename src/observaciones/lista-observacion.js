@@ -66,7 +66,7 @@ export default class ObservacionList extends React.Component {
   
   render(){
     return (
-      <section className='section-first-item'>
+      <section className='section-first-item px-3'>
     <h1 className='text-center'>Lista de observaciones</h1>
     {
       localStorage.getItem("rol")==="administrador"?(
