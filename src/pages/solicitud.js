@@ -19,7 +19,7 @@ const Solicitud = () => {
         return (
         <React.StrictMode>
         <Header/>
-        <Chat/>
+        
         <SolicitudRegistro></SolicitudRegistro>
         <Footer/>
         </React.StrictMode>

@@ -19,7 +19,7 @@ const Materia = () => {
         return (
         <React.StrictMode>
         <Header/>
-        <Chat/>
+        
         <MateriaList/>
         <Footer/>
         </React.StrictMode>

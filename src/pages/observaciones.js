@@ -19,7 +19,7 @@ const Observaciones = () => {
         return (
           <React.StrictMode>
           <Header/>
-          <Chat/>
+          
           <ObservacionList/>
           <Footer/>
           </React.StrictMode>

@@ -50,9 +50,13 @@ function Login(props){
               window.location.replace('');
           })
           .catch(function (error) {
-              //console.log(error);
+              console.log(error);
               setVariant("danger")
               setShowAlert(true)
+              if(error.response) {
+                setAlertMessage(error.response.data.error)
+                return
+              }
               setAlertMessage("Algo salio mal")
           });
     } catch (error) {

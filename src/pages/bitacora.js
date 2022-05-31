@@ -21,7 +21,7 @@ const Bitacora = () => {
         return (
         <React.StrictMode>
         <Header/>
-        <Chat/>
+        
         <SolicitudList/>
         <Footer/>
         </React.StrictMode>

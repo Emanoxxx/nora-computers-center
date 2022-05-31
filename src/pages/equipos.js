@@ -11,7 +11,7 @@ const Equipos = () => {
         return (
         <React.StrictMode>
         <Header/>
-        <Chat/>
+        
         <EquipoList/>
         <Footer/>
         </React.StrictMode>

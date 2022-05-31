@@ -15,7 +15,7 @@ const Home = () => {
     <Header/>
     <Intro/>
     <Acercade/>
-    <Chat/>
+    
     <Footer/>
     </React.StrictMode>
     );

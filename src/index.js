@@ -8,10 +8,12 @@ import Observaciones from "./pages/observaciones";
 import Usuarios from "./pages/usuarios";
 import Solicitud from "./pages/solicitud";
 import Materia from "./pages/materia";
+import Chat from "./chat/chat";
 
 export default function App() {
   return (
     <BrowserRouter>
+      <Chat/>
       <Routes>
           <Route index element={<Home />} />
           <Route path="Equipos" element={<Equipos />} />

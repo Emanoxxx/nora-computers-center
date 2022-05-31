@@ -19,7 +19,7 @@ const Usuarios= () => {
         return (
         <React.StrictMode>
         <Header/>
-        <Chat/>
+        
         <UserList/>
         <Footer/>
         </React.StrictMode>
