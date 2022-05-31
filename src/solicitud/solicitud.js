@@ -111,15 +111,15 @@ export default class SolicitudRegistro extends React.Component {
                 this.setSolicitudCreada(res.data)
                 alert("Agregado con exito")
                 this.toggleModalAdd()
-            }).catch(function (error) {
+            }).catch(error => {
               this.setVariant("danger")
               console.log(error)
                 if(error.response){
-                  this.setsetShowAlert(true)
+                  this.setShowAlert(true)
                   this.setAlertMessage(error.response.data.error)
                   return
                 }else{
-                  this.setsetShowAlert(true)
+                  this.setShowAlert(true)
                   this.setAlertMessage("Algo salio mal")
                 }
               
@@ -160,11 +160,11 @@ export default class SolicitudRegistro extends React.Component {
       </Form.Group>
       <Form.Group className="mb-3" >
           <Form.Label>Objetivo</Form.Label>
-          <Form.Control type="text" placeholder="Objetivo..." pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.' required/>
+          <Form.Control type="text" placeholder="Objetivo..." pattern="[A-Za-z0-9 ]{1,256}" title='No uses caracteres especiales, ni lo dejes en blanco.' required/>
       </Form.Group>
       <div className='d-flex'>
-        <Button className='w-100' variant="primary" type="submit">
-            Submit
+        <Button   variant="primary" className='w-100 btn-solicitar' type="submit">
+            Solicitar
         </Button>
       </div>
       </Form>

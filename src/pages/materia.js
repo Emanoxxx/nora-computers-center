@@ -8,6 +8,14 @@ import Chat from '../chat/chat';
 import MateriaList from "../materia/lista-materia"
 import "../css/root.css"
 const Materia = () => {
+  if (localStorage.getItem("rol")!==("administrador")) {
+    if (localStorage.getItem("nombre")===null) {
+      alert("Lo siento no tienes permitido entrar aqui")
+    }else{
+      alert("Lo siento "+localStorage.getItem("nombre")+" no tienes permitido entrar aqui")
+    }
+    window.location.replace('/');
+  }else{
         return (
         <React.StrictMode>
         <Header/>
@@ -16,7 +24,7 @@ const Materia = () => {
         <Footer/>
         </React.StrictMode>
         );
-      };
+      };}
       
       export default Materia;
   

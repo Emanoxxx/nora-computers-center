@@ -8,7 +8,7 @@ import Chat from '../chat/chat';
 import "../css/root.css"
 import ObservacionList from '../observaciones/lista-observacion';
 const Observaciones = () => {
-      if (localStorage.getItem("rol")!==("alumno")&&localStorage.getItem("rol")!==("administrador")) {
+      if (localStorage.getItem("rol")!==("administrador")) {
         if (localStorage.getItem("nombre")===null) {
           alert("Lo siento no tienes permitido entrar aqui")
         }else{

@@ -168,7 +168,7 @@ export default class MateriaList extends React.Component {
                 }
                     <Form.Group className="mb-3">
                       <Form.Label>Nombre</Form.Label>
-                      <Form.Control type="text" placeholder="Nombre" pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
+                      <Form.Control type="text" placeholder="Nombre" pattern="[A-Za-z0-9 ]{1,256}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
                     </Form.Group>
                       <Form.Group className="mb-3">
                       <Form.Label>Profesor</Form.Label>

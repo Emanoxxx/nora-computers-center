@@ -28,6 +28,13 @@
   resize: none;
   overflow-y: auto;
 }
+.btn-solicitar{
+  background: #114971;
+  border: none;
+}
+.btn-solicitar:hover{
+  background: #1c69a0;
+}
 .btn-add-Observacion{
   text-decoration: none;
   border-radius: 5px;

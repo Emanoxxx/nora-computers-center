@@ -83,10 +83,8 @@ export default class EquipoList extends React.Component {
           )
             .then(res => {
                 this.state.equipos.push(res.data)
-                this.setShowAlert(true)
-                this.setAlertMessage("Agregado con exito")
-                alert("Agregado con exito")
                 this.toggleModalAdd()
+                alert("Agregado con exito")
             }).catch(function (error) {
               console.log(error)
               this.setsetShowAlert(true)
@@ -128,7 +126,7 @@ export default class EquipoList extends React.Component {
                 }
                     <Form.Group className="mb-3">
                       <Form.Label>Nombre</Form.Label>
-                      <Form.Control type="text" placeholder="Nombre" pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
+                      <Form.Control type="text" placeholder="Nombre" pattern="[A-Za-z0-9 ]{1,256}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
                     </Form.Group>
                     <Form.Group className="mb-3 d-flex flex-column">
                       <Form.Label>Descripcion</Form.Label>

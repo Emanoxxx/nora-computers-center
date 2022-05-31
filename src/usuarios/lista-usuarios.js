@@ -147,19 +147,19 @@ export default class EquipoList extends React.Component {
                 }
                     <Form.Group className="mb-3">
                       <Form.Label>Nombre</Form.Label>
-                      <Form.Control type="text" placeholder="Nombre" pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
+                      <Form.Control type="text" placeholder="Nombre" pattern="[A-Za-z0-9 ]{1,256}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type="password" placeholder="Password" pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
+                      <Form.Control type="password" placeholder="Password" pattern="[A-Za-z0-9 ]{1,256}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Repite tu Password</Form.Label>
-                      <Form.Control type="password" placeholder="Repite tu Password" pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
+                      <Form.Control type="password" placeholder="Repite tu Password" pattern="[A-Za-z0-9 ]{1,256}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Matricula</Form.Label>
-                      <Form.Control type="text" placeholder="Matricula" pattern="[A-Za-z0-9 ]{1,15}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
+                      <Form.Control type="text" placeholder="Matricula" pattern="[A-Za-z0-9 ]{1,256}" title='No uses caracteres especiales, ni lo dejes en blanco.'/>
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Carrera</Form.Label>
