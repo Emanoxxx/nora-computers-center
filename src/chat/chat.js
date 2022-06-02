@@ -38,7 +38,7 @@ function Chat() {
     websocket.onerror = function (evt) {
         onError(evt);
     };
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
     const [mensaje, setMensaje] = useState("");
     const [listaDeMensajes, setListaDeMensajes] = useState([]);
     const [isOnAChat, setIsOnAChat] = useState(false);
