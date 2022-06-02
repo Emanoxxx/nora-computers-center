@@ -9,8 +9,8 @@ import {
 import "../css/mensajes.css";
 import { useState } from "react";
 import Mensaje from "./mensaje";
-function ListaDeMensajes({ listaDeMensajes }) {
-    var matricula = localStorage.getItem("matricula") || "sin registro";
+function ListaDeMensajes({ listaDeMensajes, matricula }) {
+    // var matricula = localStorage.getItem("matricula") || "sin registro";
     return (  
         <>
             <div className="flex-grow-1 flex-column mensajeria">

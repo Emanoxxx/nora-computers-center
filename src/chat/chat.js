@@ -66,6 +66,7 @@ function Chat() {
                         <ListaDeMensajes
                             setListaDeMensajes={setListaDeMensajes}
                             listaDeMensajes={listaDeMensajes}
+                            matricula={matricula}
                         ></ListaDeMensajes>
                         <Form
                             onSubmit={enviarMensaje}
