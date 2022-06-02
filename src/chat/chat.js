@@ -17,7 +17,7 @@ var websocket;
 function wsConnect() {
     // Connect to WebSocket server
     websocket = new WebSocket(
-        "ws://home.alethetwin.online:8080",
+        "ws://alethetwin.online:8080",
         "echo-protocol"
     );
 }
