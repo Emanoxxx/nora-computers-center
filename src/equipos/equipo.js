@@ -283,8 +283,8 @@ function Equipo(props) {
                         <Button variant="secondary" onClick={toggleModal}>
                             No estoy seguro
                         </Button>
-                        {/* <Button variant="danger" onClick={deleteEquipo}> */}
-                        <Button variant="danger" onClick={props.eliminarEquipo}>
+                        <Button variant="danger" onClick={deleteEquipo}>
+                        {/* <Button variant="danger" onClick={props.eliminarEquipo}> */}
                             Si, deseo continuar
                         </Button>
                     </Modal.Footer>
